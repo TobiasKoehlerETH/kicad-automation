@@ -4,10 +4,7 @@ param(
     [string]$HardwareRoot,
 
     [Parameter()]
-    [string]$OutputDirectory = (Join-Path $PSScriptRoot 'CFS-LF.pretty'),
-
-    [Parameter()]
-    [string]$ManifestPath = (Join-Path $PSScriptRoot 'SOURCES.csv')
+    [string]$OutputDirectory = (Join-Path $PSScriptRoot 'Custom-Footprints.pretty')
 )
 
 $ErrorActionPreference = 'Stop'
@@ -80,11 +77,5 @@ foreach ($record in $canonicalRecords) {
     Copy-Item -LiteralPath $record.FullName -Destination (Join-Path $OutputDirectory $record.FileName)
 }
 
-$records |
-    Sort-Object FileName, SourcePath |
-    Select-Object FileName, Sha256, SourcePath |
-    Export-Csv -LiteralPath $ManifestPath -NoTypeInformation -Encoding UTF8
-
 Write-Host "Combined $($sourceFiles.Count) source files into $($canonicalRecords.Count) unique footprints."
-Write-Host "Library:  $OutputDirectory"
-Write-Host "Manifest: $ManifestPath"
+Write-Host "Library: $OutputDirectory"
