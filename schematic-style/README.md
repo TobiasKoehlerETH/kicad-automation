@@ -44,7 +44,7 @@ Multiple projects can be styled in one call:
 .\Set-KiCadProjectSchematicStyle.ps1 C:\project-a\a.kicad_pro, C:\project-b\b.kicad_pro
 ```
 
-The script embeds `C:\Code\kicad-automation\personal\APlogo_black.png` into `Angst-Pfister-Schematic.kicad_wks`, places that worksheet beside the project, and points the project's schematic settings to it using `${KIPRJMOD}`. KiCad uses that worksheet on every page in the schematic hierarchy.
+The script embeds a locally supplied PNG into `Angst-Pfister-Schematic.kicad_wks`, places that worksheet beside the project, and points the project's schematic settings to it using `${KIPRJMOD}`. KiCad uses that worksheet on every page in the schematic hierarchy. The company logo is intentionally excluded from GitHub; provide it with `-LogoPath`.
 
 To use another copy of the logo:
 

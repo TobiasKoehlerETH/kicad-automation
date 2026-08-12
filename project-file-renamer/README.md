@@ -29,7 +29,7 @@ Copy `Apply-AngstPfister-SchematicStyle.cmd` into a KiCad project folder and dou
 - Group Engineering;
 - the embedded Angst+Pfister logo at the bottom right of every schematic sheet.
 
-Close KiCad before running it. The command creates a timestamped backup of the project file and worksheet before changing them.
+Place a local `APlogo_black.png` beside the `.cmd` file, or pass a logo path to the PowerShell script. The image is intentionally not stored in GitHub. Close KiCad before running it. The command creates a timestamped backup of the project file and worksheet before changing them.
 
 ## Safety
 

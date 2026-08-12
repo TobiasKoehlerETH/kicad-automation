@@ -16,7 +16,12 @@ if not exist "%STYLE_SCRIPT%" (
     exit /b 1
 )
 
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%STYLE_SCRIPT%" -ProjectPath "%LAUNCHER_DIR%"
+set "LOCAL_LOGO=%LAUNCHER_DIR%APlogo_black.png"
+if exist "%LOCAL_LOGO%" (
+    powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%STYLE_SCRIPT%" -ProjectPath "%LAUNCHER_DIR%" -LogoPath "%LOCAL_LOGO%"
+) else (
+    powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%STYLE_SCRIPT%" -ProjectPath "%LAUNCHER_DIR%"
+)
 set "EXIT_CODE=%ERRORLEVEL%"
 
 echo.
