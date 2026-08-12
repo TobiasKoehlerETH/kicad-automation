@@ -1,0 +1,80 @@
+(footprint "CPG-13-SMT-B"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -1.4 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "e9507c34-4375-440f-8c9c-11cf1079e0ba")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "CPG-13-SMT-B "
+		(at 0 1.4 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "0bc01634-9b2c-441c-9a38-4f121755d3b6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "89c30abf-e2ff-4e74-a84f-c49858eab3a3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "aaccb2c2-3006-45bf-aa4f-9f1b597c038d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr exclude_from_pos_files exclude_from_bom)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_text user "${REFERENCE}"
+		(at 0 2.9 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "a3512de5-e876-4395-8a33-ca19ace59354")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 2.6 2.6)
+		(drill 1.4)
+		(layers "*.Cu" "F.Mask")
+		(remove_unused_layers no)
+		(uuid "5867fd23-efbd-49e1-bdf2-c053a9edd8f3")
+	)
+	(embedded_fonts no)
+)
