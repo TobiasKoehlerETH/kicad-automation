@@ -1,0 +1,120 @@
+(kicad_wks
+	(version 20231118)
+	(generator "pl_editor")
+	(generator_version "10.0")
+	(setup
+		(textsize 1.5 1.5)
+		(linewidth 0.15)
+		(textlinewidth 0.15)
+		(left_margin 10)
+		(right_margin 10)
+		(top_margin 10)
+		(bottom_margin 10)
+	)
+	(rect
+		(name "Page border")
+		(start 0 0 ltcorner)
+		(end 0 0 rbcorner)
+	)
+	(rect
+		(name "Title block")
+		(start 160 40)
+		(end 2 2)
+	)
+	(line
+		(name "Title separator")
+		(start 160 32)
+		(end 2 32)
+	)
+	(line
+		(name "Sheet separator")
+		(start 160 24)
+		(end 2 24)
+	)
+	(line
+		(name "Identity separator")
+		(start 160 16)
+		(end 2 16)
+	)
+	(line
+		(name "Logo separator")
+		(start 52 16)
+		(end 52 2)
+	)
+	(line
+		(name "Date separator")
+		(start 125 24)
+		(end 125 16)
+	)
+	(line
+		(name "Revision separator")
+		(start 105 24)
+		(end 105 16)
+	)
+	(line
+		(name "Sheet-number separator")
+		(start 45 24)
+		(end 45 16)
+	)
+	(tbtext "Title: ${TITLE}"
+		(name "Title")
+		(pos 158 36)
+		(font (size 2.2 2.2) bold)
+		(justify left)
+	)
+	(tbtext "Sheet: ${SHEETNAME}"
+		(name "Sheet name")
+		(pos 158 28)
+		(font (size 1.8 1.8) bold)
+		(justify left)
+	)
+	(tbtext "File: ${FILENAME}"
+		(name "File name")
+		(pos 103 20)
+		(justify left)
+	)
+	(tbtext "Rev: ${REVISION}"
+		(name "Revision")
+		(pos 123 20)
+		(justify left)
+	)
+	(tbtext "Date: ${ISSUE_DATE}"
+		(name "Date")
+		(pos 158 20)
+		(justify left)
+	)
+	(tbtext "Sheet ${#}/${##}"
+		(name "Sheet number")
+		(pos 43 20)
+		(justify left)
+	)
+	(tbtext "Company: Angst+Pfister"
+		(name "Company")
+		(pos 158 13.8)
+		(font (size 1.5 1.5) bold)
+		(justify left)
+	)
+	(tbtext "Author: Tobias Köhler"
+		(name "Author")
+		(pos 158 10.6)
+		(justify left)
+	)
+	(tbtext "Sensing Materials Team"
+		(name "Team")
+		(pos 158 7.4)
+		(justify left)
+	)
+	(tbtext "Group Engineering"
+		(name "Group")
+		(pos 158 4.2)
+		(justify left)
+	)
+	(bitmap
+		(name "Angst+Pfister logo")
+		(pos 27 9)
+		(scale 0.118)
+		(data
+__LOGO_DATA__
+		)
+	)
+)
