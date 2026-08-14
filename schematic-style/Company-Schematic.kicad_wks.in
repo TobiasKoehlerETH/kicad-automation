@@ -88,7 +88,7 @@
 		(pos 43 20)
 		(justify left)
 	)
-	(tbtext "Company: Angst+Pfister"
+	(tbtext "Company: Sensing Materials"
 		(name "Company")
 		(pos 158 13.8)
 		(font (size 1.5 1.5) bold)
@@ -110,7 +110,7 @@
 		(justify left)
 	)
 	(bitmap
-		(name "Angst+Pfister logo")
+		(name "Company logo")
 		(pos 27 9)
 		(scale 0.118)
 		(data

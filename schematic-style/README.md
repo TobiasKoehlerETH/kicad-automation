@@ -5,11 +5,11 @@ This package standardizes KiCad schematics with:
 - **Segoe UI** as the Schematic Editor's default font;
 - **black** schematic text, labels, references, values, pin text, and worksheet text;
 - a reusable drawing sheet containing:
-  - Company: Angst+Pfister
+  - Company: Sensing Materials
   - Author: Tobias Köhler
   - Sensing Materials Team
   - Group Engineering
-  - the black Angst+Pfister logo at the bottom right of every schematic sheet.
+  - the black company logo at the bottom right of every schematic sheet.
 
 The scripts target KiCad's current JSON project/configuration format and were verified with KiCad 10 on Windows.
 
@@ -44,7 +44,7 @@ Multiple projects can be styled in one call:
 .\Set-KiCadProjectSchematicStyle.ps1 C:\project-a\a.kicad_pro, C:\project-b\b.kicad_pro
 ```
 
-The script embeds a locally supplied PNG into `Angst-Pfister-Schematic.kicad_wks`, places that worksheet beside the project, and points the project's schematic settings to it using `${KIPRJMOD}`. KiCad uses that worksheet on every page in the schematic hierarchy. The company logo is intentionally excluded from GitHub; provide it with `-LogoPath`.
+The script embeds a locally supplied PNG into `Company-Schematic.kicad_wks`, places that worksheet beside the project, and points the project's schematic settings to it using `${KIPRJMOD}`. KiCad uses that worksheet on every page in the schematic hierarchy. The company logo is intentionally excluded from GitHub; provide it with `-LogoPath`.
 
 To use another copy of the logo:
 

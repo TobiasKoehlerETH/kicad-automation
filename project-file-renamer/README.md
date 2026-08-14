@@ -18,16 +18,16 @@ A standalone Windows launcher for renaming the files in a KiCad project set thro
 
 For example, entering `control_board` renames `main.kicad_pcb` to `control_board.kicad_pcb` and applies the same base name to the other supported project files.
 
-## Apply the Angst+Pfister schematic style
+## Apply the company schematic style
 
-Copy `Apply-AngstPfister-SchematicStyle.cmd` into a KiCad project folder and double-click it. It finds the single `.kicad_pro` file in that folder and applies:
+Copy `Apply-CompanySchematicStyle.cmd` into a KiCad project folder and double-click it. It finds the single `.kicad_pro` file in that folder and applies:
 
-- the Angst+Pfister drawing sheet;
-- Company: Angst+Pfister;
+- the company drawing sheet;
+- Company: Sensing Materials;
 - Author: Tobias Köhler;
 - Sensing Materials Team;
 - Group Engineering;
-- the embedded Angst+Pfister logo at the bottom right of every schematic sheet.
+- the embedded company logo at the bottom right of every schematic sheet.
 
 Place a local `APlogo_black.png` beside the `.cmd` file, or pass a logo path to the PowerShell script. The image is intentionally not stored in GitHub. Close KiCad before running it. The command creates a timestamped backup of the project file and worksheet before changing them.
 

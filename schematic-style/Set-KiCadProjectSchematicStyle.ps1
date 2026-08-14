@@ -79,7 +79,7 @@ if (-not (Test-Path -LiteralPath $LogoPath -PathType Leaf)) {
     throw "Logo not found: $LogoPath"
 }
 
-$worksheetTemplate = Join-Path $PSScriptRoot 'Angst-Pfister-Schematic.kicad_wks.in'
+$worksheetTemplate = Join-Path $PSScriptRoot 'Company-Schematic.kicad_wks.in'
 if (-not (Test-Path -LiteralPath $worksheetTemplate -PathType Leaf)) {
     throw "Worksheet template not found: $worksheetTemplate"
 }
@@ -88,7 +88,7 @@ $timeStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 foreach ($path in $ProjectPath) {
     $projectFile = Resolve-ProjectFile -Path $path
     $projectDirectory = $projectFile.DirectoryName
-    $worksheetPath = Join-Path $projectDirectory 'Angst-Pfister-Schematic.kicad_wks'
+    $worksheetPath = Join-Path $projectDirectory 'Company-Schematic.kicad_wks'
 
     Copy-Item -LiteralPath $projectFile.FullName -Destination "$($projectFile.FullName).$timeStamp.bak"
     if (Test-Path -LiteralPath $worksheetPath -PathType Leaf) {
@@ -101,7 +101,7 @@ foreach ($path in $ProjectPath) {
     if (-not ($project.PSObject.Properties.Name -contains 'schematic')) {
         Set-JsonProperty -Object $project -Name 'schematic' -Value ([PSCustomObject]@{})
     }
-    Set-JsonProperty -Object $project.schematic -Name 'page_layout_descr_file' -Value '${KIPRJMOD}/Angst-Pfister-Schematic.kicad_wks'
+    Set-JsonProperty -Object $project.schematic -Name 'page_layout_descr_file' -Value '${KIPRJMOD}/Company-Schematic.kicad_wks'
     Write-JsonFile -Value $project -Path $projectFile.FullName
 
     Write-Host "Styled project: $($projectFile.FullName)"

@@ -1,6 +1,6 @@
 @echo off
 setlocal
-title Angst+Pfister KiCad Schematic Style
+title KiCad Schematic Style
 
 set "LAUNCHER_DIR=%~dp0"
 set "STYLE_SCRIPT=%LAUNCHER_DIR%..\schematic-style\Set-KiCadProjectSchematicStyle.ps1"
@@ -26,7 +26,7 @@ set "EXIT_CODE=%ERRORLEVEL%"
 
 echo.
 if "%EXIT_CODE%"=="0" (
-    echo Angst+Pfister schematic style applied to the project in this folder.
+    echo Schematic style applied to the project in this folder.
 ) else (
     echo The style was not applied. See the error above.
 )
