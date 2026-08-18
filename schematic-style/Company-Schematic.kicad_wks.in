@@ -78,7 +78,7 @@
 		(pos 123 20)
 		(justify left)
 	)
-	(tbtext "Date: ${ISSUE_DATE}"
+	(tbtext "Date: __ISSUE_DATE__"
 		(name "Date")
 		(pos 158 20)
 		(justify left)
@@ -88,18 +88,18 @@
 		(pos 43 20)
 		(justify left)
 	)
-	(tbtext "Company: Sensing Materials"
+	(tbtext "Company: Angst+Pfister"
 		(name "Company")
 		(pos 158 13.8)
 		(font (size 1.5 1.5) bold)
 		(justify left)
 	)
-	(tbtext "Author: Tobias Köhler"
+	(tbtext "Author: __AUTHOR_NAME__"
 		(name "Author")
 		(pos 158 10.6)
 		(justify left)
 	)
-	(tbtext "Sensing Materials Team"
+	(tbtext "__TEAM_NAME__"
 		(name "Team")
 		(pos 158 7.4)
 		(justify left)

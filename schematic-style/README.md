@@ -5,7 +5,7 @@ This package standardizes KiCad schematics with:
 - **Segoe UI** as the Schematic Editor's default font;
 - **black** schematic text, labels, references, values, pin text, and worksheet text;
 - a reusable drawing sheet containing:
-  - Company: Sensing Materials
+  - Company: Angst+Pfister
   - Author: Tobias Köhler
   - Sensing Materials Team
   - Group Engineering
@@ -32,7 +32,11 @@ The installer creates and selects a dedicated `segoe-ui-black` color theme. It l
 
 ## 2. Apply the drawing sheet to a project
 
-Close KiCad, then pass either the project directory or its `.kicad_pro` file:
+For an interactive terminal interface, double-click `project-file-renamer\Apply-CompanySchematicStyle.cmd`. The dark-red menu includes a keyboard file browser for choosing the schematic project folder (or `.kicad_pro` file) and PNG logo. Use the arrow keys and Enter to browse or select the highlighted row; Esc backs out, Backspace moves up, `D` opens the drive list, and `G` opens a text prompt for a typed or pasted path. The menu validates every selection, checks that KiCad is closed, and shows a final review before applying the style.
+
+The TUI includes a short startup reveal and progress spinners during the final worksheet update; redirected or scripted input automatically uses plain prompts.
+
+For direct command-line use, close KiCad and pass either the project directory or its `.kicad_pro` file:
 
 ```powershell
 .\Set-KiCadProjectSchematicStyle.ps1 C:\path\to\board.kicad_pro
@@ -52,9 +56,12 @@ To use another copy of the logo:
 .\Set-KiCadProjectSchematicStyle.ps1 C:\path\to\board.kicad_pro -LogoPath C:\path\to\APlogo_black.png
 ```
 
+The author and team default to `Tobias Köhler` and `Sensing Materials Team`. Override them in direct command-line use with `-AuthorName` and `-TeamName`.
+
 ## Safety and scope
 
 - Both scripts stop if KiCad is running, preventing the application from overwriting the changes.
 - Timestamped `.bak` files are created before existing settings, projects, or worksheets are changed.
+- Every generated worksheet includes the date it was applied in `YYYY-MM-DD` format.
 - The global setting supplies Segoe UI wherever schematic text inherits KiCad's default font. Text items that explicitly store a different font face retain that explicit choice.
 - KiCad has no global preference for a custom project drawing sheet. Run the project script once for each existing project, and use a styled project as the starting point for new projects.

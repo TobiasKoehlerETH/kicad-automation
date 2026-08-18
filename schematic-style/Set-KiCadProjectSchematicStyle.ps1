@@ -3,11 +3,25 @@ param(
     [Parameter(Mandatory, Position = 0)]
     [string[]] $ProjectPath,
 
-    [string] $LogoPath = (Join-Path (Split-Path $PSScriptRoot -Parent) 'personal\APlogo_black.png')
+    [string] $LogoPath,
+
+    [string] $AuthorName,
+
+    [string] $TeamName
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+
+if ([string]::IsNullOrWhiteSpace($LogoPath)) {
+    $LogoPath = Join-Path (Split-Path -Path $PSScriptRoot -Parent) 'personal\APlogo_black.png'
+}
+if ([string]::IsNullOrWhiteSpace($AuthorName)) {
+    $AuthorName = 'Tobias K' + [char]0x00F6 + 'hler'
+}
+if ([string]::IsNullOrWhiteSpace($TeamName)) {
+    $TeamName = 'Sensing Materials Team'
+}
 
 function Write-JsonFile {
     param(
@@ -30,6 +44,12 @@ function Set-JsonProperty {
     )
 
     $Object | Add-Member -MemberType NoteProperty -Name $Name -Value $Value -Force
+}
+
+function ConvertTo-KiCadWorksheetText {
+    param([Parameter(Mandatory)] [string] $Value)
+
+    return $Value.Replace('\', '\\').Replace('"', '\"')
 }
 
 function Resolve-ProjectFile {
@@ -55,7 +75,10 @@ function New-WorksheetFile {
     param(
         [Parameter(Mandatory)] [string] $TemplatePath,
         [Parameter(Mandatory)] [string] $ImagePath,
-        [Parameter(Mandatory)] [string] $DestinationPath
+        [Parameter(Mandatory)] [string] $DestinationPath,
+        [Parameter(Mandatory)] [string] $Author,
+        [Parameter(Mandatory)] [string] $Team,
+        [Parameter(Mandatory)] [string] $DateText
     )
 
     $template = Get-Content -LiteralPath $TemplatePath -Raw -Encoding UTF8
@@ -65,6 +88,9 @@ function New-WorksheetFile {
         "`t`t`t`"$($base64.Substring($offset, $length))`""
     }
     $worksheet = $template.Replace('__LOGO_DATA__', ($chunks -join [Environment]::NewLine))
+    $worksheet = $worksheet.Replace('__AUTHOR_NAME__', (ConvertTo-KiCadWorksheetText $Author))
+    $worksheet = $worksheet.Replace('__TEAM_NAME__', (ConvertTo-KiCadWorksheetText $Team))
+    $worksheet = $worksheet.Replace('__ISSUE_DATE__', (ConvertTo-KiCadWorksheetText $DateText))
     $utf8WithoutBom = New-Object System.Text.UTF8Encoding($false)
     [System.IO.File]::WriteAllText($DestinationPath, $worksheet, $utf8WithoutBom)
 }
@@ -85,6 +111,7 @@ if (-not (Test-Path -LiteralPath $worksheetTemplate -PathType Leaf)) {
 }
 
 $timeStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+$issueDate = Get-Date -Format 'yyyy-MM-dd'
 foreach ($path in $ProjectPath) {
     $projectFile = Resolve-ProjectFile -Path $path
     $projectDirectory = $projectFile.DirectoryName
@@ -95,7 +122,7 @@ foreach ($path in $ProjectPath) {
         Copy-Item -LiteralPath $worksheetPath -Destination "$worksheetPath.$timeStamp.bak"
     }
 
-    New-WorksheetFile -TemplatePath $worksheetTemplate -ImagePath $LogoPath -DestinationPath $worksheetPath
+    New-WorksheetFile -TemplatePath $worksheetTemplate -ImagePath $LogoPath -DestinationPath $worksheetPath -Author $AuthorName -Team $TeamName -DateText $issueDate
 
     $project = Get-Content -LiteralPath $projectFile.FullName -Raw -Encoding UTF8 | ConvertFrom-Json
     if (-not ($project.PSObject.Properties.Name -contains 'schematic')) {
