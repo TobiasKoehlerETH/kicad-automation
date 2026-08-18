@@ -22,7 +22,7 @@ and logo to existing projects.
 - [Schematic styling documentation](schematic-style/README.md)
 - Install defaults: `schematic-style/Install-KiCadSchematicDefaults.ps1`
 - Apply a project style: `schematic-style/Set-KiCadProjectSchematicStyle.ps1`
-- Interactive launcher: `project-file-renamer/Apply-CompanySchematicStyle.cmd`
+- Self-contained interactive launcher: `apply-company-schematic-style/Apply-CompanySchematicStyle.cmd`
 
 ### Custom footprint library
 

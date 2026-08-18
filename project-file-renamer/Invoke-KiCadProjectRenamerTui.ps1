@@ -128,7 +128,7 @@ function Show-TuiEffect {
     }
 }
 
-function Show-SuccessAnimation {
+function Show-CompletionExplosion {
     param([string] $Title)
 
     if (-not (Test-TuiAnimation)) {
@@ -136,24 +136,91 @@ function Show-SuccessAnimation {
         return
     }
 
-    $full = [char]0x2588
-    $empty = [char]0x2591
-    $check = [char]0x2713
-    $barWidth = 18
+    $canvasWidth = 72
+    $visibleTitle = $Title
+    if ($visibleTitle.Length -gt 42) {
+        $visibleTitle = $visibleTitle.Substring(0, 39) + '...'
+    }
+
+    $frames = @()
+    $frames += ,@(
+        '·',
+        '·   |   ·',
+        '  \  |  /',
+        '     ✦',
+        "  /  |  \",
+        '·   |   ·',
+        '·'
+    )
+    $frames += ,@(
+        '·    .    ·',
+        ' .   \|/   . ',
+        '   ·  |  ·',
+        '---   ✦   ---',
+        '   ·  |  ·',
+        ' .   /|\   . ',
+        '·    .    ·'
+    )
+    $frames += ,@(
+        '·  .  ·  .  ·  .  ·',
+        ' .  \  |  /  \  |  . ',
+        '---   \ | /   ---',
+        '      [✦]',
+        '---   / | \   ---',
+        ' .  /  |  \  /  |  . ',
+        '·  .  ·  .  ·  .  ·'
+    )
+    $frames += ,@(
+        '.   ·   .   ·   .   ·',
+        ' \  |  / \  |  / \  |',
+        '---\ | /---\ | /---',
+        "---  ✦  $visibleTitle  ✦  ---",
+        '---/ | \---/ | \---',
+        ' /  |  \ /  |  \ /  |',
+        '.   ·   .   ·   .   ·'
+    )
+    $frames += ,@(
+        '·       .       ·       .',
+        '    \   |   /       \   |',
+        ' .    \ | /    .    \ | /',
+        "      ✦  $visibleTitle  ✦",
+        ' .    / | \    .    / | \',
+        '    /   |   \       /   |',
+        '·       .       ·       .'
+    )
+
     $cursorVisible = $null
+    $origin = $null
     try {
+        $origin = $Host.UI.RawUI.CursorPosition
         $cursorVisible = $Host.UI.RawUI.CursorVisible
         $Host.UI.RawUI.CursorVisible = $false
     }
-    catch {}
+    catch {
+        Write-Status Success $Title
+        return
+    }
 
     try {
-        foreach ($filled in 0..$barWidth) {
-            $bar = ($full.ToString() * $filled) + ($empty.ToString() * ($barWidth - $filled))
-            Write-Host ("`r  $bar".PadRight(78)) -NoNewline -ForegroundColor DarkRed
-            Start-Sleep -Milliseconds 24
+        foreach ($frame in $frames) {
+            $Host.UI.RawUI.CursorPosition = $origin
+            foreach ($line in $frame) {
+                $leftPadding = [Math]::Max(0, [int][Math]::Floor(($canvasWidth - $line.Length) / 2))
+                Write-Host (((' ' * $leftPadding) + $line).PadRight($canvasWidth)) -ForegroundColor DarkRed
+            }
+            Start-Sleep -Milliseconds 85
         }
-        Write-Host ("`r" + (' ' * 78) + "`r") -NoNewline
+
+        $Host.UI.RawUI.CursorPosition = $origin
+        foreach ($line in $frames[-1]) {
+            Write-Host (' ' * $canvasWidth)
+        }
+        $Host.UI.RawUI.CursorPosition = $origin
+        Write-Host "  ✦  $Title  ✦" -ForegroundColor White -BackgroundColor DarkRed
+    }
+    catch {
+        Write-Host ''
+        Write-Status Success $Title
     }
     finally {
         if ($null -ne $cursorVisible) {
@@ -161,8 +228,6 @@ function Show-SuccessAnimation {
         }
     }
 
-    Write-Host "  $check  " -NoNewline -ForegroundColor White -BackgroundColor DarkRed
-    Write-Host " $Title" -ForegroundColor DarkRed
 }
 
 function Read-MenuChoice {
@@ -808,10 +873,10 @@ while ($true) {
                 Show-TuiEffect 'Preparing staged rename'
                 $count = Invoke-SafeRename -Plan $plan.Plan -Directory $directory.Directory
                 if ($count -eq 0) {
-                    Write-Status Info 'Names already match.'
+                    Show-CompletionExplosion 'Project files already have those names'
                 }
                 else {
-                    Show-SuccessAnimation "$count project file(s) renamed"
+                    Show-CompletionExplosion "$count project file(s) renamed"
                 }
                 Wait-BeforeExit
                 exit 0

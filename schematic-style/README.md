@@ -32,7 +32,7 @@ The installer creates and selects a dedicated `segoe-ui-black` color theme. It l
 
 ## 2. Apply the drawing sheet to a project
 
-For an interactive terminal interface, double-click `project-file-renamer\Apply-CompanySchematicStyle.cmd`. The dark-red menu includes a keyboard file browser for choosing the schematic project folder (or `.kicad_pro` file) and PNG logo. Use the arrow keys and Enter to browse or select the highlighted row; Esc backs out, Backspace moves up, `D` opens the drive list, and `G` opens a text prompt for a typed or pasted path. The menu validates every selection, checks that KiCad is closed, and shows a final review before applying the style.
+For an interactive terminal interface, double-click `..\apply-company-schematic-style\Apply-CompanySchematicStyle.cmd`. The self-contained launcher lives in its own folder so it can be copied as a portable package. Its dark-red menu includes a keyboard file browser for choosing the schematic project folder (or `.kicad_pro` file) and PNG logo. Use the arrow keys and Enter to browse or select the highlighted row; Esc backs out, Backspace moves up, `D` opens the drive list, and `G` opens a text prompt for a typed or pasted path. The menu validates every selection, checks that KiCad is closed, and shows a final review before applying the style.
 
 The TUI includes a short startup reveal and progress spinners during the final worksheet update; redirected or scripted input automatically uses plain prompts.
 
