@@ -32,6 +32,12 @@ builder for recreating it from source hardware projects.
 - [Custom footprint library documentation](custom-footprint-library/README.md)
 - Builder: `custom-footprint-library/Build-Custom-Footprint-Library.ps1`
 
+### KiCad skill set
+
+The repository also contains a consolidated, neutralized KiCad skill bundle:
+
+- [KiCad skills](kicad-skills/index.md)
+
 ## Quick start
 
 1. Close KiCad before changing project files or KiCad configuration.
